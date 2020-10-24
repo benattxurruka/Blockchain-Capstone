@@ -8,7 +8,7 @@ import "./Oraclize.sol";
 
 contract Ownable {
     //  TODO's
-    Address ozAddress;
+    using Address for address;
     //  1) create a private '_owner' variable of type address with a public getter function
     private address _owner;
 
@@ -29,7 +29,7 @@ contract Ownable {
     function transferOwnership(address newOwner) public onlyOwner {
         // TODO add functionality to transfer control of the contract to a newOwner.
         // make sure the new owner is a real address
-        require(!ozAddress.isContract(msg.sender()), "The given address is a contract address and it should be an account address.");
+        require(!msg.sender().isContract(), "The given address is a contract address and it should be an account address.");
         _owner = msg.sender;
         emit NewOwner(_owner);
 
