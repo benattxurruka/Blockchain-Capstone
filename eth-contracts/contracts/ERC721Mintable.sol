@@ -10,7 +10,7 @@ contract Ownable {
     //  TODO's
     using Address for address;
     //  1) create a private '_owner' variable of type address with a public getter function
-    private address _owner;
+    address private _owner;
 
     function getOwner() public view returns (address) {
         return _owner;
@@ -22,7 +22,7 @@ contract Ownable {
     }
     //  3) create an 'onlyOwner' modifier that throws if called by any account other than the owner.
     modifier onlyOwner() {
-        require(msgn.sender == _owner, "Caller is not contract owner");
+        require(msg.sender == _owner, "Caller is not contract owner");
         _;
     }
     //  4) fill out the transferOwnership function
@@ -45,7 +45,45 @@ contract Ownable {
 //  4) create 'whenNotPaused' & 'paused' modifier that throws in the appropriate situation
 //  5) create a Paused & Unpaused event that emits the address that triggered the event
 
-contract ERC165 {
+contract Pausable is Ownable {
+    bool private _paused = false;
+
+    constructor () internal {
+        _paused = false;
+        emit Unpaused(msg.sender);
+    }
+
+    /**
+     * @dev public method to know if contract is active or paused
+     */
+    function isPaused() public view returns(bool) {
+        return _paused;
+    }
+
+    function setPaused (bool paused) public onlyOwner {
+        _paused = paused;
+        if (_paused){
+            emit Paused(msg.sender);
+        } else {
+            emit Unpaused(msg.sender);
+        }
+    }
+
+    modifier whenNotPaused() {
+        require(_paused == true, "Contract is paused.");
+        _;
+    }
+
+    modifier paused() {
+        require(_paused == false, "Contract is running.");
+        _;
+    }
+
+    event Paused(address trigger);
+    event Unpaused(address trigger);
+}
+
+contract ERC165 is Ownable{
     bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
     /*
      * 0x01ffc9a7 ===
