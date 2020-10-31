@@ -29,8 +29,8 @@ contract Ownable {
     function transferOwnership(address newOwner) public onlyOwner {
         // TODO add functionality to transfer control of the contract to a newOwner.
         // make sure the new owner is a real address
-        require(!msg.sender().isContract(), "The given address is a contract address and it should be an account address.");
-        _owner = msg.sender;
+        require(!newOwner.isContract(), "The given address is a contract address and it should be an account address.");
+        _owner = newOwner;
         emit NewOwner(_owner);
 
     }
@@ -262,7 +262,7 @@ contract ERC721 is Pausable, ERC165 {
         _ownedTokensCount[to].increment();
 
         // TODO emit Transfer event
-        Transfer(msg.sender, to, tokenId);
+        emit Transfer(msg.sender, to, tokenId);
     }
 
     // @dev Internal function to transfer ownership of a given token ID to another address.
@@ -284,7 +284,7 @@ contract ERC721 is Pausable, ERC165 {
         transferFrom(from, to, tokenId);
 
         // TODO: emit correct event
-        Transfer(from, to, tokenId);
+        emit Transfer(from, to, tokenId);
     }
 
     /**
@@ -490,8 +490,12 @@ contract ERC721Enumerable is ERC165, ERC721 {
 contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     
     // TODO: Create private vars for token _name, _symbol, and _baseTokenURI (string)
+    string private _name;
+    string private _symbol;
+    string private _baseTokenURI;
 
     // TODO: create private mapping of tokenId's to token uri's called '_tokenURIs'
+    mapping (uint256 => string) private _tokenURIs;
 
     bytes4 private constant _INTERFACE_ID_ERC721_METADATA = 0x5b5e139f;
     /*
@@ -504,11 +508,24 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 
     constructor (string memory name, string memory symbol, string memory baseTokenURI) public {
         // TODO: set instance var values
-
+        _name = name;
+        _symbol = symbol;
+        _baseTokenURI = baseTokenURI;
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
     }
 
     // TODO: create external getter functions for name, symbol, and baseTokenURI
+    function getName() public view returns(string memory) {
+        return _name;
+    }
+
+    function getSymbol() public view returns(string memory) {
+        return _symbol;
+    }
+    
+    function getBaseTokenURI() public view returns(string memory) {
+        return _baseTokenURI;
+    }
 
     function tokenURI(uint256 tokenId) external view returns (string memory) {
         require(_exists(tokenId));
