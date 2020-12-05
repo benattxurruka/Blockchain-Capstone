@@ -1,7 +1,8 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
-import 'zokrates/code/square/verifier.sol';
+//import './../../zokrates/code/square/verifier.sol';
+import './ERC721Mintable.sol';
 contract Verifier {
     function verifyTx(
             uint[2] memory a,
@@ -30,7 +31,7 @@ contract SolnSquareVerifier is CapstonkenERC721Token {
 
 
     // TODO Create an event to emit when a solution is added
-    event Added(Solution solution);
+    event Added(uint index, address sender);
 
 
     // TODO Create a function to add the solutions to the array and emit the event
@@ -50,7 +51,7 @@ contract SolnSquareVerifier is CapstonkenERC721Token {
     //  - make sure you handle metadata as well as tokenSuplly
     function verifyAndMint(uint[2] memory a, uint[2][2] memory b, uint[2] memory c, uint[2] memory input, uint256 tokenId) public {
         bytes32 key = keccak256(abi.encodePacked(a, b, c, input));
-        require(submitted[key].sender == 0x0, 'The solution has already been submitted');
+        require(submitted[key].sender == address(0), 'The solution has already been submitted');
         require(verifier.verifyTx(a, b, c, input), 'The solution is not valid');
         add(a, b, c, input);
         mint(msg.sender, tokenId);
