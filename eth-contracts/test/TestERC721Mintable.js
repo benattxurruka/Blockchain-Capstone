@@ -52,7 +52,6 @@ contract('Capstone ERC721Token tests', accounts => {
             let ownerOfTwo = await contract.ownerOf.call(2);
             assert.equal(account_two, ownerOfTwo, "Oner of token with ID = 2 is not correct.");
             let ownerOfThree = await contract.ownerOf.call(3);
-            // console.log('ownerOfThree: ' + ownerOfThree);
             assert.equal(account_two, ownerOfThree, "Oner of token with ID = 3 is not correct.");
         })
     });
