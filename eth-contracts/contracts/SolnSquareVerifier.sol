@@ -1,21 +1,14 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
-//import './../../zokrates/code/square/verifier.sol';
+import './../../zokrates/code/square/verifier.sol';
 import './ERC721Mintable.sol';
-contract Verifier {
-    function verifyTx(
-            uint[2] memory a,
-            uint[2][2] memory b,
-            uint[2] memory c, uint[2] memory input
-        ) public view returns (bool r);
-}
 
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
-contract SolnSquareVerifier is CapstonkenERC721Token {
+contract SolnSquareVerifier is CapstonkenERC721Token, Verifier {
 
     uint indexCounter = 0;
-    Verifier verifier;
+    // Verifier verifier;
 
     // TODO define a solutions struct that can hold an index & an address
     struct Solution {
@@ -43,6 +36,9 @@ contract SolnSquareVerifier is CapstonkenERC721Token {
             
         bytes32 key = keccak256(abi.encodePacked(a, b, c, input));
         submitted[key] = newSolution;
+        solutions.push(newSolution);
+        
+        emit Added(newSolution.index, newSolution.sender);
     }
 
 
@@ -52,7 +48,7 @@ contract SolnSquareVerifier is CapstonkenERC721Token {
     function verifyAndMint(uint[2] memory a, uint[2][2] memory b, uint[2] memory c, uint[2] memory input, uint256 tokenId) public {
         bytes32 key = keccak256(abi.encodePacked(a, b, c, input));
         require(submitted[key].sender == address(0), 'The solution has already been submitted');
-        require(verifier.verifyTx(a, b, c, input), 'The solution is not valid');
+        require(verifyTx(a, b, c, input), 'The solution is not valid');
         add(a, b, c, input);
         mint(msg.sender, tokenId);
     }

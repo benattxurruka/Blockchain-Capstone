@@ -25,7 +25,7 @@ contract('TestSquareVerifier', async(accounts) => {
                         "0x0000000000000000000000000000000000000000000000000000000000000001"];
 
             let verification = await this.verifier.verifyTx(a,b,c,inputs, {from: accounts[0]});
-            assert.equal(true, verification);
+            assert.equal(true, verification, "The proof should be correct.");
         })
 
         // Test verification with incorrect proof
@@ -45,7 +45,7 @@ contract('TestSquareVerifier', async(accounts) => {
                         "0x0000000000000000000000000000000000000000000000000000000000000001"];
 
             let verification = await this.verifier.verifyTx(a,b,c,inputs, {from: accounts[0]});
-            assert.equal(false, verification);
+            assert.equal(false, verification, "The proof should be incorrect.");
         })
     });
 
