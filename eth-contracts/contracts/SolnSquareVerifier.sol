@@ -5,7 +5,7 @@ import './../../zokrates/code/square/verifier.sol';
 import './ERC721Mintable.sol';
 
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
-contract SolnSquareVerifier is CapstonkenERC721Token, Verifier {
+contract SolnSquareVerifier is RealestokenERC721Token, Verifier {
 
     uint indexCounter = 0;
     // Verifier verifier;

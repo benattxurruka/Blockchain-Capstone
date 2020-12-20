@@ -1,6 +1,6 @@
-var CapstonkenERC721Token = artifacts.require('CapstonkenERC721Token');
+var RealestokenERC721Token = artifacts.require('RealestokenERC721Token');
 
-contract('Capstone ERC721Token tests', accounts => {
+contract('Real Estate ERC721Token tests', accounts => {
 
     let contract;
     const account_one = accounts[0];
@@ -8,7 +8,7 @@ contract('Capstone ERC721Token tests', accounts => {
 
     describe('match erc721 spec', function () {
         beforeEach(async function () { 
-            contract = await CapstonkenERC721Token.new({from: account_one});
+            contract = await RealestokenERC721Token.new({from: account_one});
 
             // TODO: mint multiple tokens
             await contract.mint(account_one, 1, { from: account_one });
@@ -58,7 +58,7 @@ contract('Capstone ERC721Token tests', accounts => {
 
     describe('have ownership properties', function () {
         beforeEach(async function () { 
-            contract = await CapstonkenERC721Token.new({from: account_one});
+            contract = await RealestokenERC721Token.new({from: account_one});
         })
 
         it('should fail when minting when address is not contract owner', async function () { 

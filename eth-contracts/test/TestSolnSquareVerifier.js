@@ -1,10 +1,10 @@
-var CapstonkenERC721Token = artifacts.require('CapstonkenERC721Token');
+var RealestokenERC721Token = artifacts.require('RealestokenERC721Token');
 var SolnSquareVerifier = artifacts.require('SolnSquareVerifier');
 
 contract('TestSolnSquareVerifier', async(accounts) => {
     beforeEach(async function () { 
       this.solnSquareVerifier = await SolnSquareVerifier.new({from: accounts[0]});
-      this.contract = await CapstonkenERC721Token.new({from: accounts[0]});  
+      this.contract = await RealestokenERC721Token.new({from: accounts[0]});  
     });
 
     // Test if a new solution can be added for contract - SolnSquareVerifier
