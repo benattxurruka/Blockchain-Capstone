@@ -27,15 +27,23 @@ Follow these steps to run the tests:
 
 # Deployed contract address
 
+Follow these steps to deploy contracts:
+1. Navigate to tests folder: `cd eth-contracts` 
+2. Execute: `truffle migrate --network rinkeby --reset`
+
 The contracts have been deployed at theese addesses
 
-* Migrations: [Transaction](https://rinkeby.etherscan.io/tx/0x6b75e026e2065a1ff465f21f4ba2556d5e0427e912350d331ada8bbc91f895c8) and [Address](https://rinkeby.etherscan.io/address/0x3Cff2331E8B4a31387b0df02710D5eF9CD811630)
+* __Migrations:__ Deployed at address: [0x3Cff2331E8B4a31387b0df02710D5eF9CD811630](https://rinkeby.etherscan.io/address/0x3Cff2331E8B4a31387b0df02710D5eF9CD811630) with [this transaction](https://rinkeby.etherscan.io/tx/0x6b75e026e2065a1ff465f21f4ba2556d5e0427e912350d331ada8bbc91f895c8)
 
-* SolnSquareVerifier: [Transaction](https://rinkeby.etherscan.io/tx/0x9a177dbf63eb91751fa125f03318213179ab76cef44e12b6c5cec09fd04c3f6c) and [Adress](https://rinkeby.etherscan.io/address/0x17256037237E4649B7F4A94C0f822CB34eC4d1D3)
+* __SolnSquareVerifier:__ Deployed at address: [0x17256037237E4649B7F4A94C0f822CB34eC4d1D3](https://rinkeby.etherscan.io/address/0x17256037237E4649B7F4A94C0f822CB34eC4d1D3) with [this transaction](https://rinkeby.etherscan.io/tx/0x9a177dbf63eb91751fa125f03318213179ab76cef44e12b6c5cec09fd04c3f6c)
 
-## OpenSea Assets
-Minted assests can be found in OpenSea website.
-https://testnets.opensea.io/assets/realestoken
+* __Verifier:__ Deployed at address: [0x8461005fba5B93ae9581C90B6B479A757B7D4754](https://rinkeby.etherscan.io/address/0x8461005fba5B93ae9581C90B6B479A757B7D4754) with [this transaction](https://rinkeby.etherscan.io/tx/0xbc8872af64e1af943af680ce1a3e3defe0d4c0d096ad1766fe07d98f3b02861f)
+
+# OpenSea Marketplace
+Minted assests can be found in OpenSea website marketplace.
+* https://testnets.opensea.io/assets/realestoken
+
+* https://rinkeby.opensea.io/assets/realestoken
 
 The transactions made by each one can be consulted clicking on them:
 ![Warehouse asset](images/warehouse_asset.jpg)
